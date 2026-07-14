@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dark Lens Photography — Style B: Cinematic Editorial</title>
+<meta name="description" content="Dark Lens Photography — cinematic editorial concept. Riyadh, Saudi Arabia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b; --ink:#f4f2ee; --muted:#9b978f;
+    --bronze:#b08d57; --line:#25231f;
+    --serif:'Bodoni Moda',serif; --sans:'Montserrat',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--bronze);color:#0a0a0b}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .label{font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--bronze);font-weight:500}
+  .serif{font-family:var(--serif)}
+
+  /* Top bar */
+  .bar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 32px;mix-blend-mode:difference}
+  .bar .logo{font-family:var(--serif);font-size:20px;letter-spacing:.12em}
+  .bar nav{display:flex;gap:28px}
+  .bar nav a{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;opacity:.75;transition:opacity .2s}
+  .bar nav a:hover{opacity:1}
+  a:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+
+  /* Hero */
+  .hero{position:relative;min-height:100dvh;display:flex;align-items:flex-end}
+  .hero .bgimg{position:absolute;inset:0;background:url('portfolio/portrait-man.jpg') center 30%/cover no-repeat;filter:brightness(.42) saturate(.85)}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.35) 0%,rgba(10,10,11,.05) 45%,rgba(10,10,11,.92) 100%)}
+  .hero .inner{position:relative;z-index:2;padding:0 0 9vh;width:100%}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,10vw,7.5rem);line-height:1.02;letter-spacing:.01em}
+  .hero h1 em{font-style:italic;color:var(--bronze)}
+  .hero .sub{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:34px;flex-wrap:wrap}
+  .hero p{max-width:44ch;color:var(--muted);font-size:15px}
+  .btn{
+    display:inline-block;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;
+    padding:16px 34px;border:1px solid var(--bronze);color:var(--ink);
+    transition:background .25s,color .25s;cursor:pointer;white-space:nowrap;
+  }
+  .btn:hover{background:var(--bronze);color:#0a0a0b}
+  .btn.solid{background:var(--bronze);color:#0a0a0b}
+  .btn.solid:hover{background:transparent;color:var(--ink)}
+
+  /* Chapter scaffolding */
+  section{padding:110px 0}
+  .chap{display:flex;align-items:baseline;gap:22px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:56px}
+  .chap .no{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--bronze)}
+  .chap h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4.5vw,3.2rem);line-height:1.1}
+
+  /* About */
+  .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .about-cols .big{font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.5;font-weight:400}
+  .about-cols .big em{font-style:italic;color:var(--bronze)}
+  .about-cols p{color:var(--muted);margin-bottom:18px;font-size:15px}
+  .values-line{display:flex;gap:0;margin-top:64px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .values-line div{flex:1;text-align:center;padding:26px 8px;border-left:1px solid var(--line)}
+  .values-line div:first-child{border-left:none}
+  .values-line b{font-family:var(--serif);font-weight:400;font-size:19px;display:block}
+  .values-line span{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+
+  /* Services — editorial index list */
+  .svc{border-bottom:1px solid var(--line)}
+  .svc a{display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:30px 6px;transition:padding-left .25s ease}
+  .svc a:hover{padding-left:22px}
+  .svc .idx{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:15px}
+  .svc h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,3vw,1.9rem)}
+  .svc small{color:var(--muted);font-size:13px;letter-spacing:.04em;max-width:38ch;text-align:right}
+  .svc svg{stroke:var(--bronze)}
+
+  /* Gallery — editorial offset grid */
+  .gal{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+  .gal figure{position:relative;overflow:hidden;background:#121210}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease;filter:saturate(.9)}
+  .gal figure:hover img{transform:scale(1.035);filter:saturate(1.05)}
+  .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 18px;background:linear-gradient(transparent,rgba(5,5,6,.82));display:flex;justify-content:space-between;align-items:baseline}
+  .gal figcaption b{font-family:var(--serif);font-weight:400;font-size:16px}
+  .gal figcaption span{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze)}
+  .g1{grid-column:1/8;aspect-ratio:16/10}
+  .g2{grid-column:8/13;aspect-ratio:4/5;margin-top:70px}
+  .g3{grid-column:1/6;aspect-ratio:4/5}
+  .g4{grid-column:6/13;aspect-ratio:16/9;margin-top:60px}
+  .g5{grid-column:1/7;aspect-ratio:16/10;margin-top:24px}
+  .g6{grid-column:7/13;aspect-ratio:4/5}
+
+  /* Process — vertical editorial timeline */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+  .steps .st b{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,3.4rem);color:transparent;-webkit-text-stroke:1px var(--bronze);display:block;line-height:1}
+  .steps .st h3{font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin:18px 0 10px;font-weight:600}
+  .steps .st p{color:var(--muted);font-size:14px}
+
+  /* CTA + contact */
+  .cta{position:relative;text-align:center;padding:150px 0}
+  .cta .bgimg{position:absolute;inset:0;background:url('portfolio/event-wedding.jpg') center/cover no-repeat fixed;filter:brightness(.28)}
+  .cta .inner{position:relative;z-index:2}
+  .cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,6vw,4.4rem);line-height:1.12;margin:18px 0 36px}
+  .cta h2 em{font-style:italic;color:var(--bronze)}
+  .contact-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+  .contact-strip a{display:block;padding:28px 10px;border:1px solid var(--line);transition:border-color .25s}
+  .contact-strip a:hover{border-color:var(--bronze)}
+  .contact-strip b{display:block;font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500}
+  .contact-strip span{font-size:15px;direction:ltr;unicode-bidi:embed}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;text-align:center}
+  footer .fl{font-family:var(--serif);font-size:22px;letter-spacing:.1em}
+  footer p{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+  .style-switch{position:fixed;bottom:22px;right:22px;z-index:60;background:#141412;border:1px solid var(--line);padding:12px 20px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s}
+  .style-switch:hover{border-color:var(--bronze);color:var(--ink)}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    *{transition-duration:.01ms!important}
+    .cta .bgimg{background-attachment:scroll}
+  }
+  @media (max-width:900px){
+    .about-cols{grid-template-columns:1fr;gap:36px}
+    .steps{grid-template-columns:1fr 1fr;gap:32px}
+    .contact-strip{grid-template-columns:1fr 1fr}
+    .gal{gap:14px}
+    .g1{grid-column:1/13}.g2{grid-column:1/8;margin-top:0}.g3{grid-column:8/13}
+    .g4{grid-column:1/13;margin-top:0}.g5{grid-column:1/8;margin-top:0}.g6{grid-column:8/13}
+    .bar nav{display:none}
+    .svc a{grid-template-columns:44px 1fr}
+    .svc small{display:none}
+    .values-line{flex-wrap:wrap}
+    .values-line div{flex:1 1 50%;border-top:1px solid var(--line)}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="logo" href="#top">Dark Lens</a>
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="top" style="padding:0">
+  <div class="bgimg" role="img" aria-label="Editorial portrait photograph in warm tones"></div>
+  <div class="veil"></div>
+  <div class="wrap inner">
+    <span class="label">Riyadh — Photography &amp; Media</span>
+    <h1>Capturing <em>moments,</em><br>creating stories.</h1>
+    <div class="sub">
+      <p>Dark Lens is a creative photography and media company blending artistry, technology and passion — for brands, businesses and individuals.</p>
+      <a class="btn solid" href="https://wa.me/966579220964" target="_blank" rel="noopener">Book a Session</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="chap reveal"><span class="no">01</span><h2>The studio</h2></div>
+    <div class="about-cols">
+      <p class="big reveal">We capture the essence of every moment with creativity and precision — delivering visuals that <em>inspire, connect,</em> and leave a lasting impact.</p>
+      <div class="reveal">
+        <p>Dark Lens is a creative photography and media company dedicated to capturing authentic moments and turning them into powerful visual stories.</p>
+        <p>From the first frame to final delivery, we blend artistry, technology, and passion to create exceptional imagery and media solutions.</p>
+      </div>
+    </div>
+    <div class="values-line reveal">
+      <div><b>Focus</b><span>Precision first</span></div>
+      <div><b>Creativity</b><span>Every frame</span></div>
+      <div><b>Quality</b><span>No compromise</span></div>
+      <div><b>Passion</b><span>Always</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="chap reveal"><span class="no">02</span><h2>Services</h2></div>
+    <div class="reveal">
+      <div class="svc"><a href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <span class="idx">i.</span><h3>Photography</h3><small>Events, portraits, products — composed with intention</small></a></div>
+      <div class="svc"><a href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <span class="idx">ii.</span><h3>Videography</h3><small>Production and editing, concept to final cut</small></a></div>
+      <div class="svc"><a href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <span class="idx">iii.</span><h3>Photo &amp; Video Editing</h3><small>Retouching and cinematic color grading</small></a></div>
+      <div class="svc"><a href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <span class="idx">iv.</span><h3>Aerial Shooting</h3><small>Drone perspectives — real estate, events, landscape</small></a></div>
+      <div class="svc"><a href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <span class="idx">v.</span><h3>Branding Solutions</h3><small>Campaigns, content libraries, identity shoots</small></a></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="chap reveal"><span class="no">03</span><h2>Selected work</h2></div>
+    <div class="gal">
+      <figure class="g1 reveal"><img src="portfolio/event-wedding.jpg" alt="Bride and groom during an outdoor wedding ceremony" loading="lazy"><figcaption><b>Wedding Story</b><span>Events</span></figcaption></figure>
+      <figure class="g2 reveal"><img src="portfolio/portrait-woman.jpg" alt="Natural light portrait of a smiling woman" loading="lazy"><figcaption><b>Natural Light</b><span>Portrait</span></figcaption></figure>
+      <figure class="g3 reveal"><img src="portfolio/product-watch.jpg" alt="Luxury wristwatch product photograph" loading="lazy"><figcaption><b>Timepiece</b><span>Product</span></figcaption></figure>
+      <figure class="g4 reveal"><img src="portfolio/aerial-city.jpg" alt="Aerial drone view of a city skyline" loading="lazy"><figcaption><b>City From Above</b><span>Aerial</span></figcaption></figure>
+      <figure class="g5 reveal"><img src="portfolio/event-concert.jpg" alt="Crowd celebrating at a live event" loading="lazy"><figcaption><b>Live Coverage</b><span>Events</span></figcaption></figure>
+      <figure class="g6 reveal"><img src="portfolio/portrait-man.jpg" alt="Editorial portrait of a man in warm tones" loading="lazy"><figcaption><b>Editorial Series</b><span>Portrait</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="chap reveal"><span class="no">04</span><h2>The process</h2></div>
+    <div class="steps">
+      <div class="st reveal"><b>01</b><h3>Enquire</h3><p>Tell us about your project. We reply within hours with availability and a tailored quote.</p></div>
+      <div class="st reveal"><b>02</b><h3>Plan</h3><p>Date locked with a deposit; locations scouted, mood boards and shot lists aligned.</p></div>
+      <div class="st reveal"><b>03</b><h3>Shoot</h3><p>We handle lighting, direction and backups — you focus on the moment.</p></div>
+      <div class="st reveal"><b>04</b><h3>Deliver</h3><p>Preview in 48 hours; final retouched selection via private gallery.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="bgimg" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <span class="label">Dark Lens Media</span>
+    <h2>Every picture tells a story.<br><em>Let's tell yours.</em></h2>
+    <a class="btn solid" href="https://wa.me/966579220964" target="_blank" rel="noopener">Start Your Project</a>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="contact-strip reveal">
+      <a href="tel:+966579220964"><b>Phone / WhatsApp</b><span>+966 57 922 0964</span></a>
+      <a href="mailto:info@darklens.media"><b>Email</b><span>info@darklens.media</span></a>
+      <a href="https://www.darklens.media" target="_blank" rel="noopener"><b>Website</b><span>www.darklens.media</span></a>
+      <a href="https://maps.google.com/?q=Riyadh,Saudi+Arabia" target="_blank" rel="noopener"><b>Location</b><span>Riyadh, Saudi Arabia</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">Dark Lens</div>
+  <p>Capturing Moments · Creating Stories — © 2026 Dark Lens Media, Riyadh</p>
+</footer>
+
+<a class="style-switch" href="index.html">← Style A</a>
+
+<script>
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
