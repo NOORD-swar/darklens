@@ -564,7 +564,11 @@
   </div>
 </footer>
 
-<a href="v2.html" style="position:fixed;bottom:22px;right:22px;z-index:60;background:var(--surface);border:1px solid var(--border);padding:12px 20px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s" onmouseover="this.style.borderColor='var(--bronze)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Style B →</a>
+<div style="position:fixed;bottom:22px;right:22px;z-index:60;display:flex;gap:1px;border:1px solid var(--border);background:var(--surface)" role="navigation" aria-label="Style versions">
+  <a href="index.html" aria-current="page" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:var(--bronze);color:#0c0a07">A</a>
+  <a href="v2.html" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">B</a>
+  <a href="v3.html" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">C</a>
+</div>
 
 <script>
   // Nav scroll state

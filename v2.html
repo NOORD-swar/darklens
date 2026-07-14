@@ -251,7 +251,11 @@
   <p>Capturing Moments · Creating Stories — © 2026 Dark Lens Media, Riyadh</p>
 </footer>
 
-<a class="style-switch" href="index.html">← Style A</a>
+<div style="position:fixed;bottom:22px;right:22px;z-index:60;display:flex;gap:1px;border:1px solid var(--line);background:#141412" role="navigation" aria-label="Style versions">
+  <a href="index.html" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">A</a>
+  <a href="v2.html" aria-current="page" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:var(--bronze);color:#0a0a0b">B</a>
+  <a href="v3.html" style="padding:11px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">C</a>
+</div>
 
 <script>
   const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
