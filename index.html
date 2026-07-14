@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dark Lens Photography — Capturing Moments, Creating Stories</title>
+<meta name="description" content="Dark Lens is a creative photography and media company in Riyadh, Saudi Arabia — photography, videography, editing, aerial shooting and branding solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --surface:#111113;
+    --surface-2:#161618;
+    --border:#26262a;
+    --text:#fafafa;
+    --muted:#a1a1aa;
+    --bronze:#b08d57;
+    --bronze-soft:#c9a76e;
+    --silver-hi:#f0f0f2;
+    --silver-lo:#8f8f96;
+    --radius:14px;
+    --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px; --space-5:48px; --space-6:64px; --space-7:96px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Montserrat',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--bronze);color:#0a0a0b}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 var(--space-3)}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px var(--space-4);
+    transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+  }
+  .nav.scrolled{
+    background:rgba(10,10,11,.88);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 1px 0 var(--border);
+    padding:12px var(--space-4);
+  }
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+  .brand svg{flex:none}
+  .brand-name{font-weight:700;letter-spacing:.32em;font-size:14px}
+  .brand-sub{font-weight:400;letter-spacing:.42em;font-size:8.5px;color:var(--bronze);display:block;margin-top:2px}
+  .nav-links{display:flex;gap:var(--space-4);align-items:center;list-style:none}
+  .nav-links a{
+    font-size:12px;letter-spacing:.18em;font-weight:500;color:var(--muted);
+    text-transform:uppercase;transition:color .2s;padding:8px 2px;
+  }
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:14px 28px;border-radius:999px;border:1px solid transparent;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-bronze{background:var(--bronze);color:#0c0a07}
+  .btn-bronze:hover{background:#c49d63;box-shadow:0 8px 30px rgba(176,141,87,.25)}
+  .btn-ghost{border-color:var(--border);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--bronze);color:var(--bronze)}
+  .btn svg{flex:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px;border-radius:4px}
+
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:10px}
+  .menu-toggle svg{stroke:var(--text)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100dvh;display:flex;align-items:center;position:relative;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% 38%, rgba(176,141,87,.10), transparent 60%),
+      radial-gradient(ellipse 50% 60% at 15% 80%, rgba(143,143,150,.06), transparent 60%),
+      var(--bg);
+  }
+  .lens-rings{position:absolute;right:-12vw;top:50%;transform:translateY(-50%);width:56vw;max-width:760px;aspect-ratio:1;opacity:.5;pointer-events:none}
+  .lens-rings circle{fill:none;stroke:var(--border);stroke-width:1}
+  .lens-rings .ring-accent{stroke:rgba(176,141,87,.35)}
+  .hero-inner{position:relative;z-index:2;padding-top:90px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--bronze);font-weight:600;
+    margin-bottom:var(--space-3);
+  }
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--bronze)}
+  h1{
+    font-size:clamp(2.4rem,6vw,4.6rem);
+    font-weight:800;line-height:1.08;letter-spacing:.01em;text-transform:uppercase;
+    max-width:13ch;
+  }
+  .silver{
+    background:linear-gradient(160deg,var(--silver-hi) 20%,var(--silver-lo) 60%,#d9d9de 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{color:var(--muted);max-width:52ch;margin:var(--space-3) 0 var(--space-5);font-weight:300;font-size:17px}
+  .hero-ctas{display:flex;gap:var(--space-2);flex-wrap:wrap}
+  .hero-meta{
+    display:flex;gap:var(--space-5);margin-top:var(--space-6);flex-wrap:wrap;
+  }
+  .hero-meta div{border-left:1px solid var(--border);padding-left:var(--space-2)}
+  .hero-meta strong{display:block;font-size:22px;font-weight:700;letter-spacing:.02em}
+  .hero-meta span{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:var(--space-7) 0}
+  .sec-head{margin-bottom:var(--space-6);max-width:640px}
+  .sec-head h2{
+    font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.15;
+  }
+  .sec-head p{color:var(--muted);margin-top:var(--space-2);font-weight:300}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-6);align-items:start}
+  .about-copy p{color:var(--muted);font-weight:300;margin-bottom:var(--space-3)}
+  .mission-card{
+    background:linear-gradient(150deg,var(--surface),var(--surface-2));
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:var(--space-5);position:relative;overflow:hidden;
+  }
+  .mission-card::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;
+    border:1px solid rgba(176,141,87,.25);
+  }
+  .mission-card h3{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);margin-bottom:var(--space-2)}
+  .mission-card blockquote{font-size:19px;font-weight:400;line-height:1.55}
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-2);margin-top:var(--space-6)}
+  .value{
+    border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-3);
+    text-align:center;transition:border-color .25s ease, transform .25s ease;background:var(--surface);
+  }
+  .value:hover{border-color:var(--bronze);transform:translateY(-4px)}
+  .value svg{margin:0 auto var(--space-2);stroke:var(--bronze)}
+  .value h4{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600}
+
+  /* ---------- Services ---------- */
+  #services{background:var(--surface);border-block:1px solid var(--border)}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2)}
+  .service{
+    background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+    padding:var(--space-4);transition:border-color .25s ease, transform .25s ease;
+    display:flex;flex-direction:column;gap:var(--space-2);
+  }
+  .service:hover{border-color:var(--bronze);transform:translateY(-4px)}
+  .service .icon{
+    width:52px;height:52px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(150deg,rgba(176,141,87,.16),rgba(176,141,87,.04));
+    border:1px solid rgba(176,141,87,.3);
+  }
+  .service .icon svg{stroke:var(--bronze)}
+  .service h3{font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .service p{color:var(--muted);font-size:14px;font-weight:300}
+
+  /* ---------- Portfolio ---------- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:var(--space-4)}
+  .filters button{
+    background:none;border:1px solid var(--border);color:var(--muted);border-radius:999px;
+    font-family:inherit;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:10px 20px;cursor:pointer;transition:all .2s ease;
+  }
+  .filters button:hover{color:var(--text);border-color:var(--silver-lo)}
+  .filters button.active{background:var(--bronze);border-color:var(--bronze);color:#0c0a07}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2)}
+  .work{
+    position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;
+    border:1px solid var(--border);cursor:pointer;background:var(--surface-2);
+  }
+  .work.wide{grid-column:span 2;aspect-ratio:auto}
+  .work .ph{
+    position:absolute;inset:0;display:grid;place-items:center;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(176,141,87,.14), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(143,143,150,.10), transparent 50%),
+      linear-gradient(160deg,#141416,#0c0c0e);
+  }
+  .work .ph svg{stroke:#3d3d44}
+  .work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .work:hover img{transform:scale(1.04)}
+  .work .cap{
+    position:absolute;inset:auto 0 0 0;padding:18px 20px;z-index:2;
+    background:linear-gradient(transparent,rgba(5,5,6,.85));
+    display:flex;justify-content:space-between;align-items:flex-end;
+  }
+  .work .cap b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  .work .cap span{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+  .work-note{
+    margin-top:var(--space-3);padding:var(--space-2) var(--space-3);
+    border:1px dashed var(--border);border-radius:10px;color:var(--muted);font-size:13px;font-weight:300;
+  }
+  .work-note code{color:var(--bronze);font-size:12px}
+
+  /* ---------- Process ---------- */
+  #process{background:var(--surface);border-block:1px solid var(--border)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-2);counter-reset:step}
+  .step{border-top:1px solid var(--border);padding-top:var(--space-3);position:relative}
+  .step::before{
+    counter-increment:step;content:"0" counter(step);
+    display:block;font-size:34px;font-weight:800;
+    background:linear-gradient(160deg,var(--silver-hi),var(--silver-lo));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:var(--space-2);
+  }
+  .step h3{font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:8px;color:var(--bronze)}
+  .step p{color:var(--muted);font-size:14px;font-weight:300}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    text-align:center;
+    background:
+      radial-gradient(ellipse 50% 80% at 50% 120%, rgba(176,141,87,.14), transparent 70%),
+      var(--bg);
+  }
+  .cta-band h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;text-transform:uppercase;letter-spacing:.03em;max-width:22ch;margin:0 auto var(--space-2)}
+  .cta-band p{color:var(--muted);font-weight:300;margin-bottom:var(--space-4)}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);align-items:start}
+  .contact-list{list-style:none;display:flex;flex-direction:column;gap:var(--space-2);margin-top:var(--space-3)}
+  .contact-list li a{
+    display:flex;align-items:center;gap:16px;padding:18px 20px;
+    border:1px solid var(--border);border-radius:var(--radius);
+    transition:border-color .2s ease, transform .2s ease;background:var(--surface);
+  }
+  .contact-list li a:hover{border-color:var(--bronze);transform:translateX(6px)}
+  .contact-list svg{stroke:var(--bronze);flex:none}
+  .contact-list b{display:block;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+  .contact-list span{font-size:15px;font-weight:500;direction:ltr;unicode-bidi:embed}
+  .founder-card{
+    border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-5);
+    background:linear-gradient(150deg,var(--surface),var(--surface-2));text-align:center;
+  }
+  .founder-card .avatar{
+    width:88px;height:88px;border-radius:50%;margin:0 auto var(--space-3);
+    display:grid;place-items:center;font-size:28px;font-weight:700;color:var(--bronze);
+    border:1px solid rgba(176,141,87,.4);
+    background:radial-gradient(circle at 35% 30%, rgba(176,141,87,.2), transparent 70%);
+  }
+  .founder-card h3{font-size:17px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .founder-card em{display:block;font-style:normal;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze);margin:6px 0 var(--space-3)}
+  .founder-card p{color:var(--muted);font-size:14px;font-weight:300}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:var(--space-5) 0;text-align:center}
+  footer .f-brand{font-size:15px;font-weight:700;letter-spacing:.4em;text-transform:uppercase}
+  footer .f-tag{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);margin-top:8px}
+  footer .f-legal{font-size:12px;color:var(--muted);margin-top:var(--space-3);font-weight:300}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    *{transition-duration:.01ms !important;animation:none !important}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .values{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr);row-gap:var(--space-4)}
+  }
+  @media (max-width:820px){
+    .nav-links{
+      position:fixed;inset:0;background:rgba(10,10,11,.97);
+      flex-direction:column;justify-content:center;gap:var(--space-4);
+      transform:translateX(100%);transition:transform .3s ease;
+    }
+    .nav-links.open{transform:none}
+    .nav-links a{font-size:16px}
+    .menu-toggle{display:block;z-index:110}
+    .about-grid,.contact-grid{grid-template-columns:1fr}
+    .work-grid{grid-template-columns:1fr 1fr}
+    .work.wide{grid-column:span 2}
+    .hero-meta{gap:var(--space-3)}
+  }
+  @media (max-width:520px){
+    .work-grid{grid-template-columns:1fr}
+    .work.wide{grid-column:span 1}
+    .values{grid-template-columns:1fr 1fr}
+    .services-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .lens-rings{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Dark Lens Photography — home">
+    <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <rect x="4" y="12" width="40" height="30" rx="6" stroke="#c9c9cf" stroke-width="2.2"/>
+      <path d="M16 12l4-6h8l4 6" stroke="#c9c9cf" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="24" cy="27" r="9" stroke="#b08d57" stroke-width="2.2"/>
+      <circle cx="24" cy="27" r="4" fill="#b08d57"/>
+    </svg>
+    <span>
+      <span class="brand-name">DARK LENS</span>
+      <span class="brand-sub">PHOTOGRAPHY</span>
+    </span>
+  </a>
+  <nav aria-label="Main">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="btn btn-bronze" href="https://wa.me/966579220964" target="_blank" rel="noopener">Book a Session</a></li>
+    </ul>
+  </nav>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <svg class="lens-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="300" cy="300" r="290"/>
+    <circle cx="300" cy="300" r="240" class="ring-accent"/>
+    <circle cx="300" cy="300" r="185"/>
+    <circle cx="300" cy="300" r="130" class="ring-accent"/>
+    <circle cx="300" cy="300" r="80"/>
+  </svg>
+  <div class="container hero-inner">
+    <span class="eyebrow">Riyadh · Saudi Arabia</span>
+    <h1><span class="silver">Capturing Moments,</span><br>Creating Stories.</h1>
+    <p>Dark Lens is a creative photography and media company dedicated to turning authentic moments into powerful visual stories — blending artistry, technology and passion for brands, businesses and individuals.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-bronze" href="https://wa.me/966579220964" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Book a Session
+      </a>
+      <a class="btn btn-ghost" href="#portfolio">View Portfolio</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>5+</strong><span>Services</span></div>
+      <div><strong>4K</strong><span>Video &amp; Aerial</span></div>
+      <div><strong>48h</strong><span>Preview Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <div class="sec-head">
+          <span class="eyebrow">About Us</span>
+          <h2>Artistry, technology <span class="silver">&amp; passion</span></h2>
+        </div>
+        <p>Dark Lens is a creative photography and media company dedicated to capturing authentic moments and turning them into powerful visual stories.</p>
+        <p>We blend artistry, technology, and passion to deliver exceptional imagery and media solutions for brands, businesses, and individuals — from the first frame to final delivery.</p>
+      </div>
+      <div class="mission-card reveal">
+        <h3>Our Mission</h3>
+        <blockquote>To capture the essence of every moment with creativity and precision — delivering visuals that inspire, connect, and leave a lasting impact.</blockquote>
+      </div>
+    </div>
+
+    <div class="values">
+      <div class="value reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <h4>Focus</h4>
+      </div>
+      <div class="value reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2z"/><path d="M10 21h4"/></svg>
+        <h4>Creativity</h4>
+      </div>
+      <div class="value reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M2 9h20M12 21L8 9l2-6M12 21l4-12-2-6"/></svg>
+        <h4>Quality</h4>
+      </div>
+      <div class="value reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>
+        <h4>Passion</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Services</span>
+      <h2>Everything your story <span class="silver">needs</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service reveal">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="6" width="20" height="15" rx="3"/><path d="M8 6l2-3h4l2 3"/><circle cx="12" cy="13" r="4"/></svg></span>
+        <h3>Photography</h3>
+        <p>Professional photography for events, portraits, products, and more — composed with intention, lit with precision.</p>
+      </div>
+      <div class="service reveal">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="3"/><path d="M16 10l6-3v10l-6-3"/></svg></span>
+        <h3>Videography</h3>
+        <p>High-quality video production and editing to bring your story to life — from concept to final cut.</p>
+      </div>
+      <div class="service reveal">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 10l3-3 3 3 4-4"/></svg></span>
+        <h3>Photo &amp; Video Editing</h3>
+        <p>Professional retouching and cinematic color grading for stunning, consistent results across every frame.</p>
+      </div>
+      <div class="service reveal">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v6M9 12h6"/><circle cx="5" cy="5" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></span>
+        <h3>Aerial Shooting</h3>
+        <p>Licensed drone photography and videography for unique perspectives — real estate, events, and landscapes.</p>
+      </div>
+      <div class="service reveal">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg></span>
+        <h3>Branding Solutions</h3>
+        <p>Visual content and creative solutions that elevate your brand — campaigns, content libraries, and identity shoots.</p>
+      </div>
+      <div class="service reveal" style="justify-content:center;align-items:flex-start;background:linear-gradient(150deg,rgba(176,141,87,.12),rgba(176,141,87,.02));border-color:rgba(176,141,87,.35)">
+        <h3 style="color:var(--bronze)">Need something custom?</h3>
+        <p>Every project is different. Tell us your idea and we'll build a package around it.</p>
+        <a class="btn btn-ghost" href="#contact" style="margin-top:6px">Let's talk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Selected <span class="silver">work</span></h2>
+      <p>A curated selection from our latest shooting sessions.</p>
+    </div>
+    <div class="filters reveal" role="tablist" aria-label="Portfolio filters">
+      <button class="active" data-f="all">All</button>
+      <button data-f="events">Events</button>
+      <button data-f="portrait">Portraits</button>
+      <button data-f="product">Products</button>
+      <button data-f="aerial">Aerial</button>
+    </div>
+    <div class="work-grid" id="workGrid">
+      <figure class="work wide reveal" data-cat="events">
+        <img src="portfolio/event-wedding.jpg" alt="Bride and groom during an outdoor wedding ceremony" loading="lazy">
+        <figcaption class="cap"><b>Wedding Story</b><span>Events</span></figcaption>
+      </figure>
+      <figure class="work reveal" data-cat="portrait">
+        <img src="portfolio/portrait-woman.jpg" alt="Natural light portrait of a smiling woman" loading="lazy">
+        <figcaption class="cap"><b>Natural Light</b><span>Portrait</span></figcaption>
+      </figure>
+      <figure class="work reveal" data-cat="product">
+        <img src="portfolio/product-watch.jpg" alt="Luxury wristwatch product photograph on dark background" loading="lazy">
+        <figcaption class="cap"><b>Timepiece Campaign</b><span>Product</span></figcaption>
+      </figure>
+      <figure class="work reveal" data-cat="aerial">
+        <img src="portfolio/aerial-city.jpg" alt="Aerial drone view of a city skyline" loading="lazy">
+        <figcaption class="cap"><b>City From Above</b><span>Aerial</span></figcaption>
+      </figure>
+      <figure class="work reveal" data-cat="events">
+        <img src="portfolio/event-concert.jpg" alt="Crowd celebrating at a live event with confetti" loading="lazy">
+        <figcaption class="cap"><b>Live Coverage</b><span>Events</span></figcaption>
+      </figure>
+      <figure class="work wide reveal" data-cat="portrait">
+        <img src="portfolio/portrait-man.jpg" alt="Editorial portrait of a man in warm tones" loading="lazy">
+        <figcaption class="cap"><b>Editorial Series</b><span>Portrait</span></figcaption>
+      </figure>
+    </div>
+    <p class="work-note">These six images are licensed stock samples (Unsplash) standing in for your real work — swap them for your own session photos in the <code>portfolio/</code> folder before promoting the site as your portfolio.</p>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From enquiry <span class="silver">to delivery</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Enquire</h3>
+        <p>Tell us about your project on WhatsApp or email. We reply within hours with availability and a tailored quote.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Plan</h3>
+        <p>We lock the date with a deposit, scout the location, and align on mood boards, shot lists and timing.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Shoot</h3>
+        <p>On the day, we handle everything — lighting, direction, backups — so you can focus on the moment.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Deliver</h3>
+        <p>Preview gallery within 48 hours; final retouched selection delivered in full resolution via private gallery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-band">
+  <div class="container reveal">
+    <h2>Every picture tells a story.<br><span class="silver">Let's tell yours.</span></h2>
+    <p>Focus on the moment — we'll do the rest.</p>
+    <a class="btn btn-bronze" href="https://wa.me/966579220964" target="_blank" rel="noopener">Start Your Project</a>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="sec-head" style="margin-bottom:var(--space-3)">
+          <span class="eyebrow">Contact</span>
+          <h2>Get in <span class="silver">touch</span></h2>
+        </div>
+        <ul class="contact-list">
+          <li><a href="tel:+966579220964">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><b>Phone / WhatsApp</b><span>+966 57 922 0964</span></span></a></li>
+          <li><a href="mailto:info@darklens.media">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m2 7 10 6L22 7"/></svg>
+            <span><b>Email</b><span>info@darklens.media</span></span></a></li>
+          <li><a href="https://www.darklens.media" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+            <span><b>Website</b><span>www.darklens.media</span></span></a></li>
+          <li><a href="https://maps.google.com/?q=Riyadh,Saudi+Arabia" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><b>Location</b><span>Riyadh, Saudi Arabia</span></span></a></li>
+        </ul>
+      </div>
+      <div class="founder-card reveal">
+        <div class="avatar">AA</div>
+        <h3>Abdullah Alzaidi</h3>
+        <em>Founder &amp; Photographer</em>
+        <p>Behind every Dark Lens frame is a simple belief: authentic moments, captured with precision, become stories that last. Let's create yours.</p>
+        <a class="btn btn-bronze" style="margin-top:24px" href="https://wa.me/966579220964" target="_blank" rel="noopener">Message Abdullah</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="f-brand">DARK LENS MEDIA</div>
+    <div class="f-tag">Capturing Moments · Creating Stories</div>
+    <div class="f-legal">© 2026 Dark Lens Media — Riyadh, Saudi Arabia. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), {passive:true});
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Portfolio filter
+  const buttons = document.querySelectorAll('.filters button');
+  const works = document.querySelectorAll('#workGrid .work');
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.f;
+    works.forEach(w => w.style.display = (f === 'all' || w.dataset.cat === f) ? '' : 'none');
+  }));
+</script>
+</body>
+</html>
